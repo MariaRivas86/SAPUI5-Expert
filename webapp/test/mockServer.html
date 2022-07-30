@@ -2,27 +2,28 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Prueba Marivas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Server</title>
    
     <script id="sap-ui-bootstrap"
             src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
             data-sap-ui-theme="sap_fiori_3"
             data-sap-ui-resourceroots='{
-                "logaligroup.invoices": "./"
+                "logaligroup.invoices": "../"
             }'
             data-sap-ui-compatVersion="edge"
-            data-sap-ui-oninit="module:sap/ui/core/ComponentSupport"
+            data-sap-ui-oninit="module:logaligroup/invoices/test/initMockServer"
             data-sap-ui-async="true"
-            data-sap-ui-loglevel="debug"
             data-sap-ui-frameOptions="trusted">
     </script>
  
 </head>
-<body id="content" class="sapUiBody"></body>
+<body id="content" class="sapUiBody">
 <div data-sap-ui-component data-name= "logaligroup.invoices"
                             data-id= "container"
-                            data-set-setting= '{"id": "invoices"}' >
+                            data-set-setting= '{"id": "invoices"}'            >
 </div>
-</html>
-       
 
+</body>
+
+</html>

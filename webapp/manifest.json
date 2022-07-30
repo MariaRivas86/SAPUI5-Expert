@@ -10,13 +10,21 @@
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
     "dataSources": {
-      "mainService": {
+      "mainService1": {
         "uri": "/sap/opu/odata/",
         "type": "OData",
         "settings": {
           "annotations": [],
           "localUri": "localService/metadata.xml",
           "odataVersion": "4.0"
+        }
+      },
+      "mainService": {
+        "uri": "/V2/Northwind/Northwind.svc/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
         }
       }
     }
@@ -40,19 +48,17 @@
   "sap.ui5": {
     "flexEnabled": false,
     "rootView": {
-        "viewName": "logaligroup.invoices.view.App",
-        "type": "XML",
-        "async": true,
-        "id": "App"
-    
-      },
+      "viewName": "logaligroup.invoices.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    },
     "dependencies": {
       "minUI5Version": "1.98.0",
       "libs": {
         "sap.ui.core": {},
         "sap.m": {},
         "sap.ui.layout": {}
-
       }
     },
     "contentDensities": {
@@ -66,15 +72,17 @@
           "bundleName": "logaligroup.invoices.i18n.i18n"
         }
       },
-      "": {
+      "invoices": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "Invoices.json"
+      },
+      "northwind": {
         "dataSource": "mainService",
         "preload": true,
         "settings": {
-          "synchronizationMode": "None",
-          "operationMode": "Server",
-          "autoExpandSelect": true,
-          "earlyRequests": true,
-          "groupId": "$direct"
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
         }
       }
     },
@@ -98,20 +106,32 @@
       "routes": [
         {
           "name": "RouteApp",
-          "pattern": "RouteApp",
-          "target": ["TargetApp"]
+          "pattern": "",
+          "target": "TargetOverview"
+        },
+        {
+            "name": "Details",
+            "pattern": "details/{invoicePath}",
+            "target": "TargetDetails"
+            
         }
       ],
       "targets": {
-        "TargetApp": {
+        "TargetOverview": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "App",
-          "viewName": "App"
-        }
+          "viewId": "Overview",
+          "viewName": "Overview"
+        },
+            "TargetDetails": {
+              "viewType": "XML",
+              "transition": "slide",
+              "clearControlAggregation": false,
+              "viewId": "Details",
+              "viewName": "Details"
+            }
       }
     }
-    
   }
 }
